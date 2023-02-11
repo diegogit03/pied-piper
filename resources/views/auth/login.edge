@@ -1,0 +1,9 @@
+@layout('layouts/auth')
+
+@section('content')
+  <form action="{{ route('auth.sessions.store') }}" method="POST">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit">Login</button>
+  </form>
+@endsection
