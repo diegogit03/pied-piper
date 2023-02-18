@@ -6,6 +6,9 @@ Route.group(() => {
 
   Route.get('/gitlab', 'GitlabController.create').as('gitlab.create')
   Route.get('/gitlab/callback', 'GitlabController.store').as('gitlab.store')
+
+  Route.get('/register', 'RegistersController.create').as('registers.create')
+  Route.post('/registers', 'RegistersController.store').as('registers.store')
 })
   .as('auth')
   .namespace('App/Controllers/Http/Auth')
