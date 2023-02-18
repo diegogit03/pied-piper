@@ -13,7 +13,10 @@ export default class User extends BaseModel {
   public email: string
 
   @column({ serializeAs: null })
-  public password: string
+  public password: string | null
+
+  @column()
+  public gitlabId: string | null
 
   @column()
   public rememberMeToken: string | null
