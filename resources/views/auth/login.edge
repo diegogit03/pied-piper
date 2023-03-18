@@ -2,11 +2,18 @@
 
 @section('content')
   <form action="{{ route('auth.sessions.store') }}" method="POST">
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="password" placeholder="Password">
-    <button type="submit">Login</button>
-    <a href="{{ route('auth.gitlab.create') }}">Gitlab</a>
-    <a href="{{ route('auth.registers.create') }}">Register</a>
-    <a href="{{ route('auth.passwordResets.create') }}">Forgot password</a>
+    <div>
+      <label for="email">E-Mail</label>
+      <input type="email" name="email" placeholder="Insira o E-Mail">
+    </div>
+    <div>
+      <label for="password">Senha </label>
+      <input type="password" name="password" placeholder="Insira a Senha">
+    </div>
+    <button type="submit">Entrar</button>
+    <a id="gitlab__signIn-button" href="{{ route('auth.gitlab.create') }}"><img src="gitlab-icon.svg" alt="Github Icon" /> Gitlab</a>
+    <div>
+      <p>Não tem uma conta? <a href="{{ route('auth.registers.create') }}">Registrar-se</a></p>
+    </div>
   </form>
 @endsection
