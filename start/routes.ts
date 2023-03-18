@@ -9,6 +9,12 @@ Route.group(() => {
 
   Route.get('/register', 'RegistersController.create').as('registers.create')
   Route.post('/registers', 'RegistersController.store').as('registers.store')
+
+  Route.get('/forgot', 'PasswordResetsController.create').as('passwordResets.create')
+  Route.post('/forgot', 'PasswordResetsController.store').as('passwordResets.store')
+
+  Route.get('/reset', 'PasswordResetsController.edit').as('passwordResets.edit')
+  Route.post('/reset', 'PasswordResetsController.update').as('passwordResets.update')
 })
   .as('auth')
   .namespace('App/Controllers/Http/Auth')

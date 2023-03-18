@@ -1,0 +1,10 @@
+@layout('layouts/auth')
+
+@section('content')
+  <form action="{{ route('auth.passwordResets.update') }}" method="POST">
+    <input type="hidden" name="token" value="{{ token }}">
+    <input type="password" name="password" placeholder="Password">
+    <input type="password" name="password_confirmation" placeholder="Password Confirmation">
+    <button type="submit">Update</button>
+  </form>
+@endsection
