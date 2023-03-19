@@ -1,0 +1,19 @@
+@layout('layouts/auth')
+
+@section('content')
+  <form action="{{ route('auth.sessions.store') }}" method="POST">
+    <div>
+      <label for="email">E-Mail</label>
+      <input type="email" name="email" placeholder="Insira o E-Mail">
+    </div>
+    <div>
+      <label for="password">Senha </label>
+      <input type="password" name="password" placeholder="Insira a Senha">
+    </div>
+    <input type="submit" value="Entrar">
+    <a id="gitlab__signIn-button" href="{{ route('auth.gitlab.create') }}"><img src="gitlab-icon.svg" alt="Github Icon" /> Gitlab</a>
+    <div>
+      <p>Não tem uma conta? <a href="{{ route('auth.registers.create') }}">Registrar-se</a></p>
+    </div>
+  </form>
+@endsection
