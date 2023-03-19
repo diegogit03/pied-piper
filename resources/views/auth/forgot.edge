@@ -1,0 +1,8 @@
+@layout('layouts/auth')
+
+@section('content')
+  <form action="{{ route('auth.passwordResets.store') }}" method="POST">
+    <input type="email" name="email" placeholder="E-mail">
+    <button type="submit">Send</button>
+  </form>
+@endsection
