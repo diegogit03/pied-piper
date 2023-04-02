@@ -2,7 +2,10 @@
 
 @section('content')
   <form action="{{ route('auth.passwordResets.store') }}" method="POST">
+    <div>
+      <label for="email">Insira o E-mail da conta</label>
     <input type="email" name="email" placeholder="E-mail">
-    <button type="submit">Send</button>
+    </div>
+    <button type="submit">Enviar</button>
   </form>
 @endsection
