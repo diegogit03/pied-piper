@@ -17,11 +17,4 @@ Route.group(() => {
   Route.post('/reset', 'PasswordResetsController.update').as('passwordResets.update')
 })
   .as('auth')
-  .namespace('App/Controllers/Http/Auth')
-
-Route.get('/logged', ({ auth }) => {
-  return {
-    loggedIn: auth.isLoggedIn,
-    user: auth.user,
-  }
-}).middleware('auth')
+  .namespace('Auth')
