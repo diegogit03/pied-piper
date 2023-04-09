@@ -8,4 +8,4 @@ Route.group(() => {
   Route.get('/shared', 'SharedController.index').as('shared.index')
 })
   .as('app')
-  .namespace('App')
+  .namespace('App/Controllers/Http/App')

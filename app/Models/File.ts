@@ -7,7 +7,10 @@ export default class File extends BaseModel {
   public id: number
 
   @column()
-  public name: string
+  public clientName: string
+
+  @column()
+  public filePath: string
 
   @column()
   public type: string

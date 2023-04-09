@@ -17,4 +17,4 @@ Route.group(() => {
   Route.post('/reset', 'PasswordResetsController.update').as('passwordResets.update')
 })
   .as('auth')
-  .namespace('Auth')
+  .namespace('App/Controllers/Http/Auth')

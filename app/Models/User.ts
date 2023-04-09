@@ -1,7 +1,16 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
-import { column, beforeSave, BaseModel, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  column,
+  beforeSave,
+  BaseModel,
+  HasMany,
+  hasMany,
+  manyToMany,
+  ManyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import ResetToken from './ResetToken'
+import Folder from './Folder'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -30,6 +39,9 @@ export default class User extends BaseModel {
 
   @hasMany(() => ResetToken)
   public resetTokens: HasMany<typeof ResetToken>
+
+  @manyToMany(() => Folder)
+  public folders: ManyToMany<typeof Folder>
 
   @beforeSave()
   public static async hashPassword(user: User) {

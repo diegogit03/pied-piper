@@ -1,5 +1,13 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  ManyToMany,
+  belongsTo,
+  column,
+  manyToMany,
+} from '@ioc:Adonis/Lucid/Orm'
+import User from './User'
 
 export default class Folder extends BaseModel {
   @column({ isPrimary: true })
@@ -8,9 +16,18 @@ export default class Folder extends BaseModel {
   @column()
   public name: string
 
+  @column()
+  public folderId: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @manyToMany(() => User)
+  public users: ManyToMany<typeof User>
+
+  @belongsTo(() => Folder)
+  public folder: BelongsTo<typeof Folder>
 }

@@ -7,7 +7,8 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
 
-      table.string('name').notNullable()
+      table.string('client_name').notNullable()
+      table.string('file_path').notNullable()
       table.string('type').notNullable()
       table.integer('folder_id').unsigned().notNullable()
 

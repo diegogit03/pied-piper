@@ -8,6 +8,9 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.string('name')
+      table.integer('folder_id').unsigned().notNullable()
+
+      table.foreign('folder_id').references('id').inTable('folders')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
