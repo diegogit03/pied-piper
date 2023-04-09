@@ -1,6 +1,7 @@
 @layout('layouts/auth')
 
 @section('content')
+  <div id="root"></div>
   <form action="{{ route('auth.sessions.store') }}" method="POST">
     <div>
       <label for="email">E-Mail</label>
