@@ -187,6 +187,8 @@ Encore.configureDevServerOptions((options) => {
 //   useJsx: false
 // })
 
+Encore.enableReactPreset()
+
 /*
 |--------------------------------------------------------------------------
 | Configure logging
