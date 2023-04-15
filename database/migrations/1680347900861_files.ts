@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.string('type').notNullable()
       table.integer('folder_id').unsigned().notNullable()
 
-      table.foreign('folder_id').references('id').inTable('folders')
+      table.foreign('folder_id').references('id').inTable('folders').onDelete('CASCADE')
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
