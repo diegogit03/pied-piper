@@ -4,10 +4,8 @@ import { bind } from '@adonisjs/route-model-binding'
 import Folder from 'App/Models/Folder'
 
 export default class FilesController {
-  public async index({}: HttpContextContract) {}
-
   @bind()
-  public async store({ request }: HttpContextContract, folder: Folder) {
+  public async store({ request, response }: HttpContextContract, folder: Folder) {
     const files = request.files('files')
 
     for (let file of files) {
@@ -22,7 +20,14 @@ export default class FilesController {
         name: filePath,
       })
     }
+
+    return response.created()
   }
 
-  public async destroy({}: HttpContextContract) {}
+  @bind()
+  public async destroy({ response }: HttpContextContract, file: File) {
+    await file.delete()
+
+    return response.noContent()
+  }
 }
