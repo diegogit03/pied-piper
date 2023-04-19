@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.string('name')
-      table.integer('folder_id').unsigned().notNullable()
+      table.integer('folder_id').unsigned()
 
       table.foreign('folder_id').references('id').inTable('folders').onDelete('CASCADE')
 

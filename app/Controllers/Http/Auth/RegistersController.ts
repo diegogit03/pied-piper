@@ -11,8 +11,11 @@ export default class RegistersController {
     const payload = await request.validate(RegisterStoreValidator)
 
     const user = await User.create(payload)
+    user.related('folders').create({
+      name: user.username,
+    })
 
     await auth.login(user)
-    return 'Logged!'
+    return response.redirect().toRoute('app.home')
   }
 }

@@ -40,7 +40,9 @@ export default class User extends BaseModel {
   @hasMany(() => ResetToken)
   public resetTokens: HasMany<typeof ResetToken>
 
-  @manyToMany(() => Folder)
+  @manyToMany(() => Folder, {
+    pivotTable: 'folders_users',
+  })
   public folders: ManyToMany<typeof Folder>
 
   @beforeSave()

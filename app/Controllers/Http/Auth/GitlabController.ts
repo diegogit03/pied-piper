@@ -6,7 +6,7 @@ export default class GitlabsController {
     return ally.use('gitlab').redirect()
   }
 
-  public async store({ ally, auth }: HttpContextContract) {
+  public async store({ response, ally, auth }: HttpContextContract) {
     const gitlab = ally.use('gitlab')
 
     if (gitlab.accessDenied()) {
@@ -23,19 +23,23 @@ export default class GitlabsController {
 
     const gitlabUser = await gitlab.user()
 
-    const user = await User.firstOrCreate(
-      {
-        gitlabId: gitlabUser.id,
-      },
-      {
+    let user
+    user = await User.findBy('gitlabId', gitlabUser.id)
+
+    if (!user) {
+      user = await User.create({
         username: gitlabUser.name,
         email: gitlabUser.email!,
         gitlabId: gitlabUser.id,
-      }
-    )
+      })
+
+      await user.related('folders').create({
+        name: user.username,
+      })
+    }
 
     await auth.login(user)
 
-    return 'logged!'
+    return response.redirect().toRoute('app.home')
   }
 }
