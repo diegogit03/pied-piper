@@ -2,6 +2,7 @@ import Route from '@ioc:Adonis/Core/Route'
 
 Route.group(() => {
   Route.group(() => {
+    Route.get('/root', 'FoldersController.show').as('show')
     Route.post('/:folder?', 'FoldersController.store').as('store')
     Route.delete('/:folder', 'FoldersController.destroy').as('destroy')
 

@@ -2,12 +2,15 @@ import { DateTime } from 'luxon'
 import {
   BaseModel,
   BelongsTo,
+  HasMany,
   ManyToMany,
   belongsTo,
   column,
+  hasMany,
   manyToMany,
 } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
+import File from './File'
 
 export default class Folder extends BaseModel {
   @column({ isPrimary: true })
@@ -30,4 +33,10 @@ export default class Folder extends BaseModel {
 
   @belongsTo(() => Folder)
   public folder: BelongsTo<typeof Folder>
+
+  @hasMany(() => Folder)
+  public folders: HasMany<typeof Folder>
+
+  @hasMany(() => File)
+  public files: HasMany<typeof File>
 }

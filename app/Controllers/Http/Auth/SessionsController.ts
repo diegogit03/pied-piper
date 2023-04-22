@@ -11,6 +11,6 @@ export default class SessionsController {
 
     await auth.attempt(payload.email, payload.password)
 
-    return response.redirect().toPath('/logged')
+    return response.redirect().toRoute('app.home')
   }
 }
