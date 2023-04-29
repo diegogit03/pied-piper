@@ -6,6 +6,8 @@
     "dev": "node ace serve --watch",
     "build": "node ace build --production",
     "start": "node server.js",
+    "test": "node ace test",
+    "test:dev": "node ace test --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
   },
@@ -57,6 +59,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "socket.io-client": "^4.6.1",
+    "sqlite3": "^5.1.6",
     "typescript": "~4.6",
     "webpack": "^5.72",
     "webpack-cli": "^4.9.1",

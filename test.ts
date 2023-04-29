@@ -37,6 +37,9 @@ kernel
         importer: (filePath) => import(filePath),
         setup: app.concat(runnerHooks.setup),
         teardown: runnerHooks.teardown,
+        suites: [
+          { name: 'functional', timeout: 30 * 1000, files: ['tests/functional/**/*.spec.ts'] },
+        ],
       },
       cwd: kernel.application.appRoot,
     })
