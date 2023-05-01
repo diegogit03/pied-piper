@@ -6,9 +6,8 @@ Route.group(() => {
     Route.post('/:folder?', 'FoldersController.store').as('store')
     Route.delete('/:folder', 'FoldersController.destroy').as('destroy')
 
-    Route.get('/:folder/files', 'FilesController.index').as('files.index')
     Route.post('/:folder/files', 'FilesController.store').as('files.store')
-    Route.delete('/:folder/files/:id', 'FilesController.destroy').as('files.destroy')
+    Route.delete('/:folder/files/:file', 'FilesController.destroy').as('files.destroy')
   })
     .as('folders')
     .prefix('folders')

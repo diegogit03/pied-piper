@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import File from 'App/Models/File'
 import { bind } from '@adonisjs/route-model-binding'
 import Folder from 'App/Models/Folder'
+import Drive from '@ioc:Adonis/Core/Drive'
 
 async function createFile(file: any, folder: Folder): Promise<File> {
   const filePath = file.clientName
@@ -12,7 +13,6 @@ async function createFile(file: any, folder: Folder): Promise<File> {
     type: file.type,
     folderId: folder.id,
   })
-  console.log(createFile)
 
   await file.moveToDisk('./', {
     name: filePath,
@@ -37,8 +37,10 @@ export default class FilesController {
   }
 
   @bind()
-  public async destroy({ response }: HttpContextContract, file: File) {
+  public async destroy({ response }: HttpContextContract, _: Folder, file: File) {
     await file.delete()
+
+    await Drive.delete(file.filePath)
 
     return response.noContent()
   }
