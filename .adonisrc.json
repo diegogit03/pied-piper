@@ -59,6 +59,7 @@
     ]
   },
   "testProviders": [
+    "./providers/AppProvider",
     "@japa/preset-adonis/TestsProvider"
   ]
 }

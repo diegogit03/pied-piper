@@ -12,7 +12,7 @@ export default class AppProvider {
   }
 
   public async ready() {
-    if (this.app.environment === 'web') {
+    if (this.app.environment === 'web' || this.app.environment === 'test') {
       await import('../start/socket')
     }
   }
