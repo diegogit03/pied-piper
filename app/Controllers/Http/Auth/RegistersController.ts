@@ -7,7 +7,7 @@ export default class RegistersController {
     return view.render('auth/register')
   }
 
-  public async store({ request, response, auth }: HttpContextContract) {
+  public async store({ request, auth }: HttpContextContract) {
     const payload = await request.validate(RegisterStoreValidator)
 
     const user = await User.create(payload)

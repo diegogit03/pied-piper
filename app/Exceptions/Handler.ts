@@ -28,7 +28,7 @@ export default class ExceptionHandler extends HttpExceptionHandler {
     super(Logger)
   }
 
-  public async handle(error: any, ctx: HttpContextContract): Promise<any> {
+  public async handle(error: any, _: HttpContextContract): Promise<any> {
     console.log(error)
   }
 }

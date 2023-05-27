@@ -34,7 +34,6 @@
       "@japa/preset-adonis/build/adonis-typings",
       "@adonisjs/lucid",
       "@adonisjs/mail",
-      "adonis-ally-gitlab",
       "@adonisjs/auth",
       "@adonisjs/ally",
       "@adonisjs/bouncer",
