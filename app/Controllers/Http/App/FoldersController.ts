@@ -4,56 +4,56 @@ import Folder from 'App/Models/Folder'
 import Ws from 'App/Services/Ws'
 
 export default class FoldersController {
-  public async show({ auth }: HttpContextContract) {
-    const user = auth.user!
+    public async show({ auth }: HttpContextContract) {
+        const user = auth.user!
 
-    const rootFolder = await user
-      .related('folders')
-      .query()
-      .whereRaw('"folders"."folder_id" is null')
-      .preload('folders')
-      .preload('files')
-      .firstOrFail()
+        const rootFolder = await user
+            .related('folders')
+            .query()
+            .whereRaw('"folders"."folder_id" is null')
+            .preload('folders')
+            .preload('files')
+            .firstOrFail()
 
-    return rootFolder
-  }
-
-  public async store({
-    params: { folder: parentFolderId },
-    request,
-    response,
-    auth,
-  }: HttpContextContract) {
-    const { name } = request.only(['name'])
-    const user = auth.user!
-    let parentFolder
-
-    if (parentFolderId) {
-      parentFolder = await Folder.findOrFail(parentFolderId)
-    } else {
-      parentFolder = await user
-        .related('folders')
-        .query()
-        .whereRaw('"folders"."folder_id" is null')
-        .firstOrFail()
+        return rootFolder
     }
 
-    const folder = await Folder.create({
-      name,
-      folderId: parentFolder.id,
-    })
+    public async store({
+        params: { folder: parentFolderId },
+        request,
+        response,
+        auth,
+    }: HttpContextContract) {
+        const { name } = request.only(['name'])
+        const user = auth.user!
+        let parentFolder
 
-    Ws.io.to(`folder:${parentFolder.id}`).emit('created:folder', folder)
+        if (parentFolderId) {
+            parentFolder = await Folder.findOrFail(parentFolderId)
+        } else {
+            parentFolder = await user
+                .related('folders')
+                .query()
+                .whereRaw('"folders"."folder_id" is null')
+                .firstOrFail()
+        }
 
-    return response.created(folder)
-  }
+        const folder = await Folder.create({
+            name,
+            folderId: parentFolder.id,
+        })
 
-  @bind()
-  public async destroy({ response }: HttpContextContract, folder: Folder) {
-    await folder.delete()
+        Ws.io.to(`folder:${parentFolder.id}`).emit('created:folder', folder)
 
-    Ws.io.to(`folder:${folder.folderId}`).emit('removed:folder', folder)
+        return response.created(folder)
+    }
 
-    return response.noContent()
-  }
+    @bind()
+    public async destroy({ response }: HttpContextContract, folder: Folder) {
+        await folder.delete()
+
+        Ws.io.to(`folder:${folder.folderId}`).emit('deleted:folder', folder)
+
+        return response.noContent()
+    }
 }

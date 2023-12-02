@@ -7,10 +7,11 @@ Route.group(() => {
         Route.delete('/:folder', 'FoldersController.destroy').as('destroy')
 
         Route.post('/:folder/files', 'FilesController.store').as('files.store')
-        Route.delete('/:folder/files/:file', 'FilesController.destroy').as('files.destroy')
     })
         .as('folders')
         .prefix('folders')
+
+    Route.delete('/files/:file', 'FilesController.destroy').as('files.destroy')
 
     Route.on('/app').render('app').as('view')
 })

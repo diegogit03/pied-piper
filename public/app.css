@@ -79,3 +79,53 @@
 .sidebar-button:hover {
     filter: invert(54%) sepia(18%) saturate(1733%) hue-rotate(81deg) brightness(98%) contrast(86%);
 }
+
+/** Explorer **/
+
+.explorer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.folder-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.folder-header span {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.selected {
+    background: gray;
+}
+
+ul.navigation {
+    padding: 10px 16px;
+    list-style: none;
+    background-color: #eee;
+}
+
+ul.navigation li {
+    display: inline;
+    font-size: 18px;
+}
+
+ul.navigation li+li:before {
+    padding: 8px;
+    color: black;
+    content: "/\00a0";
+}
+
+ul.navigation li a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+ul.navigation li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+}

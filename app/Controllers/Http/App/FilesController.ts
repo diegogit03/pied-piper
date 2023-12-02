@@ -3,45 +3,50 @@ import File from 'App/Models/File'
 import { bind } from '@adonisjs/route-model-binding'
 import Folder from 'App/Models/Folder'
 import Drive from '@ioc:Adonis/Core/Drive'
+import Ws from 'App/Services/Ws'
 
 async function createFile(file: any, folder: Folder): Promise<File> {
-  const filePath = file.clientName
+    const filePath = file.clientName
 
-  const createdFile = await File.create({
-    clientName: file.clientName,
-    filePath,
-    type: file.type,
-    folderId: folder.id,
-  })
+    const createdFile = await File.create({
+        clientName: file.clientName,
+        filePath,
+        type: file.type,
+        folderId: folder.id,
+    })
 
-  await file.moveToDisk('./', {
-    name: filePath,
-  })
+    await file.moveToDisk('./', {
+        name: filePath,
+    })
 
-  return createdFile
+    return createdFile
 }
 
 export default class FilesController {
-  public async index({ view }: HttpContextContract) {
-    return view.render('app/files')
-  }
+    public async index({ view }: HttpContextContract) {
+        return view.render('app/files')
+    }
 
-  @bind()
-  public async store({ request, response }: HttpContextContract, folder: Folder) {
-    const files = request.files('files')
+    @bind()
+    public async store({ request, response }: HttpContextContract, folder: Folder) {
+        const files = request.files('files')
 
-    const createFilesPromises = files.map((file) => createFile(file, folder))
-    const createdFiles = await Promise.all(createFilesPromises)
+        const createFilesPromises = files.map((file) => createFile(file, folder))
+        const createdFiles = await Promise.all(createFilesPromises)
 
-    return response.created(createdFiles)
-  }
+        Ws.io.to(`folder:${folder.id}`).emit('upload', createdFiles)
 
-  @bind()
-  public async destroy({ response }: HttpContextContract, _: Folder, file: File) {
-    await file.delete()
+        return response.created(createdFiles)
+    }
 
-    await Drive.delete(file.filePath)
+    @bind()
+    public async destroy({ response }: HttpContextContract, file: File) {
+        await file.delete()
 
-    return response.noContent()
-  }
+        await Drive.delete(file.filePath)
+
+        Ws.io.to(`folder:${file.folderId}`).emit('deleted:file', file)
+
+        return response.noContent()
+    }
 }
