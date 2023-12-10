@@ -107,6 +107,8 @@ export default () => {
             <button onClick={handleCreateFolder}>Criar Pasta</button>
             <br />
             <button onClick={handleDelete}>Excluir</button>
+            <br />
+            <a href="/logout">Sair da conta</a>
             <ul className="navigation">
                 {navigation.map((folder) => (
                     <li>

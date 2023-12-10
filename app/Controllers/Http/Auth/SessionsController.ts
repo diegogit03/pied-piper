@@ -13,4 +13,10 @@ export default class SessionsController {
 
         return response.redirect().toRoute('app.view')
     }
+
+    public async destroy({ auth, response }: HttpContextContract) {
+        await auth.logout()
+
+        return response.redirect().toRoute('auth.sessions.create')
+    }
 }
