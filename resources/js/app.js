@@ -1,13 +1,16 @@
 import { createRoot } from 'react-dom/client'
+import { createInertiaApp } from '@inertiajs/react'
 import React from 'react'
 
-import Explorer from './components/Explorer'
 import AppLayout from './shared/App'
 
-const rootEl = document.getElementById('root')
-const root = createRoot(rootEl)
-root.render(
-    <AppLayout>
-        <Explorer />
-    </AppLayout>
-)
+createInertiaApp({
+    resolve: (name) => require(`./pages/${name}`),
+    setup({ el, App, props }) {
+        createRoot(el).render(
+            <AppLayout>
+                <App {...props} />
+            </AppLayout>
+        )
+    },
+})

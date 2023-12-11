@@ -5,7 +5,7 @@ import socket from '../services/socket'
 import Folder from './Folder'
 import File from './File'
 
-export default () => {
+export default ({ initialFolder }) => {
     const [files, setFiles] = useState([])
     const [folders, setFolders] = useState([])
     const [actualFolder, setActualFolder] = useState(null)
@@ -13,16 +13,12 @@ export default () => {
     const [selected, setSelected] = useState(null)
 
     const fetchRoot = async () => {
-        const { data } = await api.get('/folders/root')
+        setFiles([...initialFolder.files])
+        setFolders([...initialFolder.folders])
+        setActualFolder(initialFolder)
+        setNavigation([initialFolder])
 
-        setFiles([...data.files])
-        setFolders([...data.folders])
-        setActualFolder(data)
-        setNavigation([data])
-
-        socket.emit('open:folder', data.id)
-
-        return data
+        socket.emit('open:folder', initialFolder.id)
     }
 
     /**

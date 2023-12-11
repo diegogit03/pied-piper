@@ -23,8 +23,18 @@ async function createFile(file: any, folder: Folder): Promise<File> {
 }
 
 export default class FilesController {
-    public async index({ view }: HttpContextContract) {
-        return view.render('app/files')
+    public async index({ inertia, auth }: HttpContextContract) {
+        const user = auth.user!
+
+        const rootFolder = await user
+            .related('folders')
+            .query()
+            .whereRaw('"folders"."folder_id" is null')
+            .preload('folders')
+            .preload('files')
+            .firstOrFail()
+
+        return inertia.render('Files', { rootFolder })
     }
 
     @bind()

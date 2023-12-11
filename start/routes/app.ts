@@ -13,7 +13,7 @@ Route.group(() => {
 
     Route.delete('/files/:file', 'FilesController.destroy').as('files.destroy')
 
-    Route.on('/app').render('app').as('view')
+    Route.get('/app', 'FilesController.index').as('home')
 })
     .middleware('auth')
     .as('app')

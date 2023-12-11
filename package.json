@@ -78,12 +78,17 @@
     "@adonisjs/session": "^6.2.0",
     "@adonisjs/shield": "^7.0.0",
     "@adonisjs/view": "^6.1.0",
+    "@eidellev/inertia-adonisjs": "^8.1.0",
+    "@inertiajs/react": "^1.0.14",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
     "adonis-ally-gitlab": "^1.1.0",
     "luxon": "^3.2.1",
     "pg": "^8.9.0",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "socket.io": "^4.6.1",
-    "source-map-support": "^0.5.21"
+    "source-map-support": "^0.5.21",
+    "webpack-node-externals": "^3.0.0"
   }
 }

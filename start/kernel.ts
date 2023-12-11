@@ -21,8 +21,9 @@ import Server from '@ioc:Adonis/Core/Server'
 |
 */
 Server.middleware.register([
-  () => import('@ioc:Adonis/Addons/RmbMiddleware'),
-  () => import('@ioc:Adonis/Core/BodyParser'),
+    () => import('@ioc:Adonis/Addons/RmbMiddleware'),
+    () => import('@ioc:Adonis/Core/BodyParser'),
+    () => import('@ioc:EidelLev/Inertia/Middleware'),
 ])
 
 /*
@@ -42,5 +43,5 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
-  auth: () => import('App/Middleware/Auth'),
+    auth: () => import('App/Middleware/Auth'),
 })

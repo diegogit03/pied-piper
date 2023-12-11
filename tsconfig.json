@@ -38,7 +38,8 @@
       "@adonisjs/auth",
       "@adonisjs/ally",
       "@adonisjs/bouncer",
-      "@adonisjs/route-model-binding/build/adonis-typings"
+      "@adonisjs/route-model-binding/build/adonis-typings",
+      "@eidellev/inertia-adonisjs"
     ]
   }
 }
