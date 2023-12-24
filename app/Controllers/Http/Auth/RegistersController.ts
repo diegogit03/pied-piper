@@ -16,6 +16,6 @@ export default class RegistersController {
         })
 
         await auth.login(user)
-        return response.redirect().toRoute('app.view')
+        return response.redirect().toRoute('app.home')
     }
 }
