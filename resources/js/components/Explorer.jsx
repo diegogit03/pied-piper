@@ -98,52 +98,64 @@ export default ({ initialFolder }) => {
 
     return (
         <div className="explorer-container">
-            <input type="file" onChange={handleFileInput} multiple />
-            <br />
-            <button onClick={handleCreateFolder}>Criar Pasta</button>
-            <br />
-            <button onClick={handleDelete}>Excluir</button>
-            <br />
-            <a href="/logout">Sair da conta</a>
-            <ul className="navigation">
+            <div className="d-flex justify-content-between">
+                <div>
+                    <input
+                        type="file"
+                        className="form-control"
+                        onChange={handleFileInput}
+                        multiple
+                    />
+                </div>
+                <div>
+                    <button className="btn btn-success mr-3" onClick={handleCreateFolder}>
+                        <i class="bi bi-folder-plus"></i>
+                        Criar Pasta
+                    </button>
+                    <button className="btn btn-success" onClick={handleDelete}>
+                        <i class="bi bi-trash3"></i>
+                        Excluir
+                    </button>
+                </div>
+            </div>
+            <ul className="navigation bg-dark p-4 my-4">
                 {navigation.map((folder) => (
                     <li>
-                        <a href="#" onClick={() => handleOpenFolder(folder)}>
+                        <a
+                            href="#"
+                            className="text-success"
+                            onClick={() => handleOpenFolder(folder)}
+                        >
                             {folder.name}
                         </a>
                     </li>
                 ))}
             </ul>
 
-            <div className="explorer">
-                {/* <h2>Pastas: </h2>
-                <ul> */}
-                {folders.map((folder) => (
-                    <Folder
-                        key={folder.id}
-                        selected={
-                            selected && selected.type === 'folder' && selected.id === folder.id
-                        }
-                        onSelect={() => setSelected({ type: 'folder', id: folder.id })}
-                        onOpen={() => handleOpenFolder(folder)}
-                        name={folder.name}
-                    />
-                    // <li key={folder.id} onClick={() => handleOpenFolder(folder.id)}>
-                    //     {folder.name}
-                    // </li>
-                ))}
-                {/* </ul>
-                <h2>Arquivos: </h2>
-                <ul> */}
-                {files.map((file) => (
-                    <File
-                        key={file.id}
-                        onSelect={() => setSelected({ type: 'file', id: file.id })}
-                        selected={selected && selected.type === 'file' && selected.id === file.id}
-                        name={file.client_name}
-                    />
-                ))}
-                {/* </ul> */}
+            <div className="container">
+                <div className="row">
+                    {folders.map((folder) => (
+                        <Folder
+                            key={folder.id}
+                            selected={
+                                selected && selected.type === 'folder' && selected.id === folder.id
+                            }
+                            onSelect={() => setSelected({ type: 'folder', id: folder.id })}
+                            onOpen={() => handleOpenFolder(folder)}
+                            name={folder.name}
+                        />
+                    ))}
+                    {files.map((file) => (
+                        <File
+                            key={file.id}
+                            onSelect={() => setSelected({ type: 'file', id: file.id })}
+                            selected={
+                                selected && selected.type === 'file' && selected.id === file.id
+                            }
+                            name={file.client_name}
+                        />
+                    ))}
+                </div>
             </div>
         </div>
     )

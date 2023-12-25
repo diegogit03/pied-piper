@@ -2,6 +2,9 @@ import { createRoot } from 'react-dom/client'
 import { createInertiaApp } from '@inertiajs/react'
 import React from 'react'
 
+import './app.css'
+import 'bootstrap/dist/js/bootstrap.bundle'
+
 import AppLayout from './shared/App'
 
 createInertiaApp({
