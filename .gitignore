@@ -5,3 +5,7 @@ coverage
 .DS_STORE
 .env
 tmp
+package-lock.json
+yarn.lock
+public/assets/entrypoints.json
+public/assets/manifest.json

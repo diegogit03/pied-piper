@@ -58,7 +58,7 @@ form div input {
   font-size: 110%;
 }
 
-form input[type='submit'] {
+form button[type='submit'] {
   font-family: 'Roboto', sans-serif;
   margin-top: 1.5rem;
   padding: 0;
@@ -94,6 +94,7 @@ form input[type='submit']:active {
   font-size: 120%;
   text-align: center;
   transition: background-color 0.2s;
+  text-decoration: none;
 }
 #gitlab__signIn-button img {
   width: 50px;
@@ -113,6 +114,7 @@ form input[type='submit']:active {
 #register__button {
   color: rgb(42, 42, 255);
   font-weight: bold;
+  text-decoration: none;
 }
 #register__button:hover {
   cursor: pointer;
