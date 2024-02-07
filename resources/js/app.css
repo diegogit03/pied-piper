@@ -1,0 +1,39 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~bootstrap-icons/font/bootstrap-icons.min.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,700;1,400&display=swap');
+
+/** Explorer **/
+
+.folder-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.folder-header i {
+    font-size: 5rem;
+}
+
+.selected {
+    border: 2px solid var(--bs-success);
+}
+
+ul.navigation li {
+    display: inline;
+    font-size: 18px;
+}
+
+ul.navigation li+li:before {
+    padding: 8px;
+    color: var(--bs-white);
+    content: "/\00a0";
+}
+
+ul.navigation li a {
+    text-decoration: none;
+}
+
+ul.navigation li a:hover {
+    text-decoration: underline;
+}
