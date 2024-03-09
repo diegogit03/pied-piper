@@ -4,13 +4,13 @@
   <form action="{{ route('auth.passwordResets.update') }}" method="POST">
     <input type="hidden" name="token" value="{{ token }}">
     <div>
-      <label for="password">Senha</label>
-    <input type="password" name="password" placeholder="Senha">
+        <label for="password" class="form-label">Senha</label>
+        <input class="form-control" type="password" name="password" placeholder="Senha">
     </div>
     <div>
-      <label for="password_confirmation">Confirme a senha</label>
-    <input type="password" name="password_confirmation" placeholder="Senha">
+        <label for="password_confirmation" class="form-label">Confirme a senha</label>
+        <input class="form-control" type="password" name="password_confirmation" placeholder="Senha">
     </div>
-    <button type="submit">Atualizar</button>
+    <button class="btn btn-success" type="submit">Atualizar</button>
   </form>
 @endsection
