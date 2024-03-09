@@ -18,17 +18,17 @@ import HttpExceptionHandler from '@ioc:Adonis/Core/HttpExceptionHandler'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class ExceptionHandler extends HttpExceptionHandler {
-  protected statusPages = {
-    '403': 'errors/unauthorized',
-    '404': 'errors/not-found',
-    '500..599': 'errors/server-error',
-  }
+    protected statusPages = {
+        '403': 'errors/unauthorized',
+        '404': 'errors/not-found',
+        '500..599': 'errors/server-error',
+    }
 
-  constructor() {
-    super(Logger)
-  }
+    constructor() {
+        super(Logger)
+    }
 
-  public async handle(error: any, ctx: HttpContextContract): Promise<any> {
-    console.log(error)
-  }
+    public async handle(error: any, ctx: HttpContextContract): Promise<any> {
+        console.log(error)
+    }
 }

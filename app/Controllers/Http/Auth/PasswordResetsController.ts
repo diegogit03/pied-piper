@@ -11,59 +11,59 @@ import { promisify } from 'util'
 import ResetUpdateValidator from 'App/Validators/ResetUpdateValidator'
 
 export default class PasswordResetsController {
-  public async create({ view }: HttpContextContract) {
-    return view.render('auth/forgot')
-  }
+    public async create({ view }: HttpContextContract) {
+        return view.render('auth/forgot')
+    }
 
-  public async store({ request, response }: HttpContextContract) {
-    const { email } = await request.validate(ForgotStoreValidator)
-    const user = await User.findByOrFail('email', email)
+    public async store({ request, response }: HttpContextContract) {
+        const { email } = await request.validate(ForgotStoreValidator)
+        const user = await User.findByOrFail('email', email)
 
-    const random = await promisify(randomBytes)(24)
-    const token = random.toString('hex')
-    await user.related('resetTokens').updateOrCreate(
-      { userId: user.id },
-      {
-        token,
-      }
-    )
+        const random = await promisify(randomBytes)(24)
+        const token = random.toString('hex')
+        await user.related('resetTokens').updateOrCreate(
+            { userId: user.id },
+            {
+                token,
+            }
+        )
 
-    await Mail.send((message) => {
-      message
-        .from('no-reply@piedpiper.com')
-        .to(email)
-        .subject('Pied Piper: recuperação de senha')
-        .htmlView('emails/forgotPassword', {
-          name: user.username,
-          resetPasswordUrl: `${Env.get('APP_URL')}${Route.makeUrl(
-            'auth.passwordResets.edit'
-          )}?token=${token}`,
+        await Mail.send((message) => {
+            message
+                .from('no-reply@piedpiper.com')
+                .to(email)
+                .subject('Pied Piper: recuperação de senha')
+                .htmlView('emails/forgotPassword', {
+                    name: user.username,
+                    resetPasswordUrl: `${Env.get('APP_URL')}${Route.makeUrl(
+                        'auth.passwordResets.edit'
+                    )}?token=${token}`,
+                })
         })
-    })
 
-    return response.redirect().back()
-  }
+        return response.redirect().back()
+    }
 
-  public async edit({ request, view }: HttpContextContract) {
-    const { token } = request.qs()
+    public async edit({ request, view }: HttpContextContract) {
+        const { token } = request.qs()
 
-    return view.render('auth/reset', { token })
-  }
+        return view.render('auth/reset', { token })
+    }
 
-  public async update({ request, response }: HttpContextContract) {
-    const { token, password } = await request.validate(ResetUpdateValidator)
+    public async update({ request, response }: HttpContextContract) {
+        const { token, password } = await request.validate(ResetUpdateValidator)
 
-    const userByToken = await User.query()
-      .whereHas('resetTokens', (query) => {
-        query.where('token', token)
-      })
-      .preload('resetTokens')
-      .firstOrFail()
+        const userByToken = await User.query()
+            .whereHas('resetTokens', (query) => {
+                query.where('token', token)
+            })
+            .preload('resetTokens')
+            .firstOrFail()
 
-    userByToken.password = password
-    await userByToken.save()
-    await userByToken.resetTokens[0].delete()
+        userByToken.password = password
+        await userByToken.save()
+        await userByToken.resetTokens[0].delete()
 
-    return response.redirect().toRoute('auth.sessions.create')
-  }
+        return response.redirect().toRoute('auth.sessions.create')
+    }
 }

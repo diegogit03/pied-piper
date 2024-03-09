@@ -18,12 +18,12 @@ import { AllyConfig } from '@ioc:Adonis/Addons/Ally'
 |
 */
 const allyConfig: AllyConfig = {
-  gitlab: {
-    driver: 'gitlab',
-    clientId: Env.get('GITLAB_CLIENT_ID'),
-    clientSecret: Env.get('GITLAB_CLIENT_SECRET'),
-    callbackUrl: 'http://localhost:3333/gitlab/callback',
-  },
+    gitlab: {
+        driver: 'gitlab',
+        clientId: Env.get('GITLAB_CLIENT_ID'),
+        clientSecret: Env.get('GITLAB_CLIENT_SECRET'),
+        callbackUrl: 'http://localhost:3333/gitlab/callback',
+    },
 }
 
 export default allyConfig

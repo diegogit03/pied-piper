@@ -1,23 +1,23 @@
 import type { ApplicationContract } from '@ioc:Adonis/Core/Application'
 
 export default class AppProvider {
-  constructor(protected app: ApplicationContract) {}
+    constructor(protected app: ApplicationContract) {}
 
-  public register() {
-    // Register your own bindings
-  }
-
-  public async boot() {
-    // IoC container is ready
-  }
-
-  public async ready() {
-    if (this.app.environment === 'web' || this.app.environment === 'test') {
-      await import('../start/socket')
+    public register() {
+        // Register your own bindings
     }
-  }
 
-  public async shutdown() {
-    // Cleanup, since app is going down
-  }
+    public async boot() {
+        // IoC container is ready
+    }
+
+    public async ready() {
+        if (this.app.environment === 'web' || this.app.environment === 'test') {
+            await import('../start/socket')
+        }
+    }
+
+    public async shutdown() {
+        // Cleanup, since app is going down
+    }
 }

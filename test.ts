@@ -24,25 +24,29 @@ sourceMapSupport.install({ handleUncaughtExceptions: false })
 const kernel = new Ignitor(__dirname).kernel('test')
 
 kernel
-  .boot()
-  .then(() => import('./tests/bootstrap'))
-  .then(({ runnerHooks, ...config }) => {
-    const app: RunnerHooksHandler[] = [() => kernel.start()]
+    .boot()
+    .then(() => import('./tests/bootstrap'))
+    .then(({ runnerHooks, ...config }) => {
+        const app: RunnerHooksHandler[] = [() => kernel.start()]
 
-    configure({
-      ...kernel.application.rcFile.tests,
-      ...processCliArgs(process.argv.slice(2)),
-      ...config,
-      ...{
-        importer: (filePath) => import(filePath),
-        setup: app.concat(runnerHooks.setup),
-        teardown: runnerHooks.teardown,
-        suites: [
-          { name: 'functional', timeout: 30 * 1000, files: ['tests/functional/**/*.spec.ts'] },
-        ],
-      },
-      cwd: kernel.application.appRoot,
+        configure({
+            ...kernel.application.rcFile.tests,
+            ...processCliArgs(process.argv.slice(2)),
+            ...config,
+            ...{
+                importer: (filePath) => import(filePath),
+                setup: app.concat(runnerHooks.setup),
+                teardown: runnerHooks.teardown,
+                suites: [
+                    {
+                        name: 'functional',
+                        timeout: 30 * 1000,
+                        files: ['tests/functional/**/*.spec.ts'],
+                    },
+                ],
+            },
+            cwd: kernel.application.appRoot,
+        })
+
+        run()
     })
-
-    run()
-  })

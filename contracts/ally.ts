@@ -6,12 +6,12 @@
  */
 
 declare module '@ioc:Adonis/Addons/Ally' {
-  import { GitlabDriver, GitlabDriverConfig } from 'adonis-ally-gitlab/build/standalone'
+    import { GitlabDriver, GitlabDriverConfig } from 'adonis-ally-gitlab/build/standalone'
 
-  interface SocialProviders {
-    gitlab: {
-      config: GitlabDriverConfig
-      implementation: GitlabDriver
+    interface SocialProviders {
+        gitlab: {
+            config: GitlabDriverConfig
+            implementation: GitlabDriver
+        }
     }
-  }
 }

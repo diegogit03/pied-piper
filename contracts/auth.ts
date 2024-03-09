@@ -8,7 +8,7 @@
 import User from 'App/Models/User'
 
 declare module '@ioc:Adonis/Addons/Auth' {
-  /*
+    /*
   |--------------------------------------------------------------------------
   | Providers
   |--------------------------------------------------------------------------
@@ -20,8 +20,8 @@ declare module '@ioc:Adonis/Addons/Auth' {
   | You can also create and register your own custom providers.
   |
   */
-  interface ProvidersList {
-    /*
+    interface ProvidersList {
+        /*
     |--------------------------------------------------------------------------
     | User Provider
     |--------------------------------------------------------------------------
@@ -33,13 +33,13 @@ declare module '@ioc:Adonis/Addons/Auth' {
     | different Lucid models.
     |
     */
-    user: {
-      implementation: LucidProviderContract<typeof User>
-      config: LucidProviderConfig<typeof User>
+        user: {
+            implementation: LucidProviderContract<typeof User>
+            config: LucidProviderConfig<typeof User>
+        }
     }
-  }
 
-  /*
+    /*
   |--------------------------------------------------------------------------
   | Guards
   |--------------------------------------------------------------------------
@@ -54,8 +54,8 @@ declare module '@ioc:Adonis/Addons/Auth' {
   | Every guard needs a provider for looking up users from the database.
   |
   */
-  interface GuardsList {
-    /*
+    interface GuardsList {
+        /*
     |--------------------------------------------------------------------------
     | Web Guard
     |--------------------------------------------------------------------------
@@ -64,10 +64,10 @@ declare module '@ioc:Adonis/Addons/Auth' {
     | the `user` provider for fetching user details.
     |
     */
-    web: {
-      implementation: SessionGuardContract<'user', 'web'>
-      config: SessionGuardConfig<'user'>
-      client: SessionClientContract<'user'>
+        web: {
+            implementation: SessionGuardContract<'user', 'web'>
+            config: SessionGuardConfig<'user'>
+            client: SessionClientContract<'user'>
+        }
     }
-  }
 }

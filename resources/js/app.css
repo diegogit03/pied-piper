@@ -24,10 +24,10 @@ ul.navigation li {
     font-size: 18px;
 }
 
-ul.navigation li+li:before {
+ul.navigation li + li:before {
     padding: 8px;
     color: var(--bs-white);
-    content: "/\00a0";
+    content: '/\00a0';
 }
 
 ul.navigation li a {
