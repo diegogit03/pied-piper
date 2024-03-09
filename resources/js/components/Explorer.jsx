@@ -107,8 +107,8 @@ export default ({ initialFolder }) => {
                         multiple
                     />
                 </div>
-                <div>
-                    <button className="btn btn-success mr-3" onClick={handleCreateFolder}>
+                <div className="flex gap-2">
+                    <button className="btn btn-success" onClick={handleCreateFolder}>
                         <i class="bi bi-folder-plus"></i>
                         Criar Pasta
                     </button>
